@@ -13,10 +13,19 @@
     "format": "npm run prettier:fix && npm run lint:fix"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.8.10",
+    "axios": "^0.21.1",
+    "js-cookie": "^3.0.1",
+    "jwt-decode": "^3.1.2",
+    "nookies": "^2.5.2",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "react-router-dom": "^6.4.2",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/js-cookie": "^3.0.2",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.5",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
