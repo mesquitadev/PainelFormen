@@ -121,7 +121,7 @@ export default function Login() {
       .post('/subscriber', values)
       .then(setLoading(true))
       .catch((response) => console.log(response));
-    if (!loading) await signIn(values);
+    // if (!loading) await signIn(values);
   };
   const { nextStep, prevStep, reset, activeStep } = useSteps({
     initialStep: 0,
@@ -1024,22 +1024,22 @@ export default function Login() {
                       label={'Link do Video do Youtube'}
                     />
                   </Stack>
+                  <Center>
+                    <Button
+                      type='submit'
+                      size='lg'
+                      w='8rem'
+                      mt='10'
+                      bg='primary.darkest'
+                      fontWeight='500'
+                      _hover={{ bg: 'primary.dark' }}
+                      isLoading={loading}
+                    >
+                      Confirmar Inscrição
+                    </Button>
+                  </Center>
                 </Step>
               </Steps>
-              <Center>
-                <Button
-                  type='submit'
-                  size='lg'
-                  w='8rem'
-                  mt='10'
-                  bg='primary.darkest'
-                  fontWeight='500'
-                  _hover={{ bg: 'primary.dark' }}
-                  isLoading={loading}
-                >
-                  Entrar
-                </Button>
-              </Center>
             </Box>
 
             {activeStep === steps.length ? (
