@@ -46,6 +46,7 @@ export default function Login() {
   const handleSignIn: SubmitHandler<SignInFormData> = async (values) => {
     if (!loading) await signIn(values);
   };
+
   return (
     <Container maxW='lg' py={{ base: '12', md: '24' }} px={{ base: '0', sm: '8' }}>
       <Stack spacing='8'>
@@ -65,6 +66,7 @@ export default function Login() {
             </Stack>
           </Stack>
           <Stack spacing='6'>
+            {/*// @ts-ignore*/}
             <Flex as='form' onSubmit={handleSubmit(handleSignIn)} flexDir='column'>
               <Input
                 name='email'

@@ -1,7 +1,6 @@
 import { Switch } from 'react-router-dom';
-import { Home, SignIn } from '@/pages';
+import { SignIn } from '@/pages';
 import Route from './Route';
-import SignUp from '@/pages/SignUp';
 
 function Routes() {
   return (

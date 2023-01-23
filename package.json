@@ -19,6 +19,7 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@hookform/resolvers": "^2.8.10",
+    "@types/react-input-mask": "^3.0.2",
     "@types/styled-components": "^5.1.26",
     "axios": "^0.21.1",
     "bootstrap": "^5.2.2",

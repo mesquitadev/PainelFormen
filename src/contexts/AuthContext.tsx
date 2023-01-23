@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useCallback, useEffect, useState } from 'react';
+import { createContext, ReactNode, useCallback, useState } from 'react';
 import Cookies from 'js-cookie';
 import api from '@/services';
 import { useLoading } from '@/hooks/useLoading';
@@ -20,7 +20,9 @@ interface SignInCredentials {
 
 export interface AuthContextData {
   token: string;
+
   signIn(credentials: SignInCredentials): Promise<void>;
+
   signOut(): void;
 }
 

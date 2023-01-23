@@ -3,7 +3,8 @@ import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/react';
 import { Select } from 'chakra-react-select';
 import { Controller } from 'react-hook-form';
 
-const Option = ({ control, name, errors, label, options, placeholder, isMulti, ...rest }) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Option = ({ control, name, label, options, placeholder, isMulti, ...rest }: any) => {
   return (
     <Controller
       control={control}
@@ -29,8 +30,10 @@ const Option = ({ control, name, errors, label, options, placeholder, isMulti, .
             <Select
               name={name}
               ref={ref}
-              value={options && value ? options.find((option) => option.value === value) : null}
-              onChange={(option) => onChange(option.value)}
+              value={
+                options && value ? options.find((option: any) => option.value === value) : null
+              }
+              onChange={(option: any) => onChange(option.value)}
               onBlur={onBlur}
               options={options}
               placeholder={placeholder ? placeholder : label}

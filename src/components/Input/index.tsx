@@ -7,7 +7,7 @@ import {
   Input as ChakraInput,
   InputProps as ChakraInputProps,
 } from '@chakra-ui/react';
-import { Control, Controller } from 'react-hook-form';
+import { Control, Controller, FieldError } from 'react-hook-form';
 import { HiXCircle } from 'react-icons/hi';
 import { Textarea } from '@chakra-ui/textarea';
 import InputMask from 'react-input-mask';
@@ -34,13 +34,15 @@ function Input({ control, name, errors, label, textArea, mask, ...rest }: InputP
     },
   }));
 
-  const getError = (message: string | undefined | null) => {
+  const getError = (message: FieldError | undefined) => {
     if (message) {
       return (
         <Box mt='1' mb={{ base: '4', md: '6' }}>
           <FormErrorMessage mb='4' color='negative.pure' gap='1' ml='1'>
-            <HiXCircle />
-            {message}
+            <>
+              <HiXCircle />
+              {message}
+            </>
           </FormErrorMessage>
         </Box>
       );
@@ -48,7 +50,7 @@ function Input({ control, name, errors, label, textArea, mask, ...rest }: InputP
     return null;
   };
 
-  const getInputType = (onChange, onBlur, value, name, inputElementRef) => {
+  const getInputType = (onChange: any, onBlur: any, value: any, inputElementRef: any) => {
     if (mask) {
       return (
         <ChakraInput
@@ -75,6 +77,7 @@ function Input({ control, name, errors, label, textArea, mask, ...rest }: InputP
       );
     } else if (textArea) {
       return (
+        // @ts-ignore
         <Textarea
           focusBorderColor={errors ? 'negative.pure' : 'primary.pure'}
           placeholder=' '
@@ -124,10 +127,7 @@ function Input({ control, name, errors, label, textArea, mask, ...rest }: InputP
     <Controller
       control={control}
       name={name}
-      render={({
-        field: { onChange, onBlur, value, name, inputElementRef },
-        fieldState: { error },
-      }) => (
+      render={({ field: { onChange, onBlur, value, name, ref }, fieldState: { error } }) => (
         <>
           <FormControl id={name} isInvalid={!!errors}>
             {label && (
@@ -135,7 +135,7 @@ function Input({ control, name, errors, label, textArea, mask, ...rest }: InputP
                 {label}
               </FormLabel>
             )}
-            {getInputType(onChange, onBlur, value, name, inputElementRef)}
+            {getInputType(onChange, onBlur, value, ref)}
             <FormErrorMessage>{getError(error)}</FormErrorMessage>
           </FormControl>
         </>

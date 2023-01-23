@@ -3,35 +3,35 @@ import {
   Button,
   Center,
   Container,
+  Divider,
   Flex,
   FormControl,
+  FormLabel,
   Heading,
   Image,
+  Link,
   ListItem,
   OrderedList,
   Stack,
+  StackDivider,
   Text,
   useBreakpointValue,
   useColorModeValue,
-  StackDivider,
-  Divider,
-  Link,
-  FormLabel,
 } from '@chakra-ui/react';
-import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/card';
-import React, { useCallback, useEffect, useState } from 'react';
+import { Card, CardBody, CardHeader } from '@chakra-ui/card';
+import { useCallback, useEffect, useState } from 'react';
 import logo from '@/assets/images/logo.png';
 // import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 // import * as yup from 'yup';
 import { useLoading } from '@/hooks/useLoading';
-import { useAuth } from '@/hooks/useAuth';
 import { Step, Steps, useSteps } from 'chakra-ui-steps';
 import { InitialFormData } from './Forms/InitialFormData';
 import Input from '@/components/Input';
 import api from '@/services';
 import Select from '@/components/Select';
 import { Select as CSelect } from 'chakra-react-select';
+
 interface SignInFormData {
   name: string;
   surname: string;
@@ -40,6 +40,23 @@ interface SignInFormData {
   rg: string;
   email: string;
   password: string;
+  genderIdentity: string;
+  linkedinUrl: string;
+  breed: string;
+  stateOfBirth: string;
+  gender: string;
+  countryOfBirth: string;
+  phone1: string;
+  phone2: string;
+  state: string;
+  city: string;
+  educationLevel: string;
+  peopleLiveInSameHouse: string;
+  didYouMeetProLider: string;
+  videoUrl: string;
+  educationData: [];
+  workData: [];
+  star: [];
 }
 
 export default function Login() {
@@ -82,8 +99,6 @@ export default function Login() {
 
   const { loading, setLoading } = useLoading();
 
-  const { signIn } = useAuth();
-
   const { handleSubmit, formState, control } = useForm({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -119,7 +134,7 @@ export default function Login() {
     console.log('val', values);
     await api
       .post('/subscriber', values)
-      .then(setLoading(true))
+      .then(() => setLoading(true))
       .catch((response) => console.log(response));
     // if (!loading) await signIn(values);
   };
@@ -188,7 +203,7 @@ export default function Login() {
       value: false,
     },
   ];
-  const handleSelectExp = (value) => {
+  const handleSelectExp = (value: any) => {
     setXpOptions(value.value);
     educationDataAppend({
       degree: '',
@@ -201,7 +216,7 @@ export default function Login() {
       grantAndAwards: '',
     });
   };
-  const handleSelectWorkExp = (value) => {
+  const handleSelectWorkExp = (value: any) => {
     setXpOptions(value.value);
     workDataAppend({
       state: '',
@@ -408,7 +423,13 @@ export default function Login() {
                 <Button size='sm'>Retomar a um formulário previamente salvo.</Button>
               </Flex>
             </Flex>
-            <Box as='form' onSubmit={handleSubmit(handleSignIn)}>
+            <Box
+              as='form'
+              onSubmit={
+                // @ts-ignore
+                handleSubmit(handleSignIn)
+              }
+            >
               <Steps activeStep={activeStep}>
                 <Step key={0} index={0}>
                   <InitialFormData />
@@ -484,6 +505,7 @@ export default function Login() {
                     placeholder='Telefone'
                     autoCapitalize='none'
                     label={'Outro Telefone'}
+                    errors={errors.phone2 && errors.phone2.message}
                   />
 
                   <Input
@@ -652,109 +674,104 @@ export default function Login() {
                   </FormControl>
                   {xpOpt && (
                     <>
-                      {educationDataFields.map((item, i) => (
+                      {educationDataFields.map((item: any, i) => (
                         <Box key={i}>
-                          <Stack spacing={4} divider={<StackDivider />}>
-                            <Heading size={'md'}>{`Experiência ${i + 1} `}</Heading>
-                          </Stack>
-                          <Stack spacing='4'>
-                            <Select
-                              defaultValue={item?.country}
-                              errors={errors.countryOfBirth && errors.countryOfBirth.message}
-                              control={control}
-                              options={countries}
-                              name={`educationData[${i}].country`}
-                              label={'País'}
-                            />
+                          <>
+                            {console.log(item)}
+                            <Stack spacing={4} divider={<StackDivider />}>
+                              <Heading size={'md'}>{`Experiência ${i + 1} `}</Heading>
+                            </Stack>
+                            <Stack spacing='4'>
+                              <Select
+                                errors={errors.countryOfBirth && errors.countryOfBirth.message}
+                                control={control}
+                                options={countries}
+                                name={`educationData[${i}].country`}
+                                label={'País'}
+                              />
 
-                            <Select
-                              defaultValue={item?.state}
-                              errors={errors.stateOfBirth && errors.stateOfBirth.message}
-                              control={control}
-                              options={states}
-                              name={`educationData[${i}].state`}
-                              label={'Estado'}
-                            />
+                              <Select
+                                errors={errors.stateOfBirth && errors.stateOfBirth.message}
+                                control={control}
+                                options={states}
+                                name={`educationData[${i}].state`}
+                                label={'Estado'}
+                              />
 
-                            <Select
-                              defaultValue={item?.degree}
-                              errors={errors.stateOfBirth && errors.stateOfBirth.message}
-                              control={control}
-                              options={degreeOptions}
-                              name={`educationData[${i}].degree`}
-                              label={'Nível do curso (Técnico, Médio, Superior, Tecnólogo, etc.'}
-                            />
+                              <Select
+                                errors={errors.stateOfBirth && errors.stateOfBirth.message}
+                                control={control}
+                                options={degreeOptions}
+                                name={`educationData[${i}].degree`}
+                                label={'Nível do curso (Técnico, Médio, Superior, Tecnólogo, etc.'}
+                              />
 
-                            <Input
-                              defaultValue={item?.course}
-                              name={`educationData[${i}].course`}
-                              control={control}
-                              autoCapitalize='words'
-                              errors={errors.name && errors.name.message}
-                              label={'Curso'}
-                            />
-                            <Input
-                              defaultValue={item?.institution}
-                              name={`educationData[${i}].institution`}
-                              control={control}
-                              autoCapitalize='words'
-                              errors={errors.name && errors.name.message}
-                              label={'Instituição'}
-                            />
-                            <Input
-                              defaultValue={item?.grantAndAwards}
-                              name={`educationData[${i}].grantAndAwards`}
-                              control={control}
-                              errors={errors.name && errors.name.message}
-                              label={'Premiações'}
-                            />
+                              <Input
+                                name={`educationData[${i}].course`}
+                                control={control}
+                                autoCapitalize='words'
+                                errors={errors.name && errors.name.message}
+                                label={'Curso'}
+                              />
+                              <Input
+                                name={`educationData[${i}].institution`}
+                                control={control}
+                                autoCapitalize='words'
+                                errors={errors.name && errors.name.message}
+                                label={'Instituição'}
+                              />
+                              <Input
+                                name={`educationData[${i}].grantAndAwards`}
+                                control={control}
+                                errors={errors.name && errors.name.message}
+                                label={'Premiações'}
+                              />
 
-                            <Input
-                              defaultValue={item?.initialDate}
-                              name={`educationData[${i}].initialDate`}
-                              control={control}
-                              type='date'
-                              errors={errors.name && errors.name.message}
-                              label={'Início'}
-                            />
+                              <Input
+                                name={`educationData[${i}].initialDate`}
+                                control={control}
+                                type='date'
+                                errors={errors.name && errors.name.message}
+                                label={'Início'}
+                              />
 
-                            <Input
-                              defaultValue={item?.endDate}
-                              name={`educationData[${i}].endDate`}
-                              control={control}
-                              type='date'
-                              errors={errors.name && errors.name.message}
-                              label={'Término'}
-                            />
+                              <Input
+                                name={`educationData[${i}].endDate`}
+                                control={control}
+                                type='date'
+                                errors={errors.name && errors.name.message}
+                                label={'Término'}
+                              />
 
-                            <Divider />
-                            <Flex py={6} width='100%' justify={'space-between'}>
-                              <Flex>
-                                <Button
-                                  onClick={() =>
-                                    educationDataAppend({
-                                      degree: '',
-                                      institution: '',
-                                      course: '',
-                                      state: '',
-                                      country: '',
-                                      initialDate: '',
-                                      endDate: '',
-                                      grantAndAwards: '',
-                                    })
-                                  }
-                                  size='sm'
-                                >
-                                  Adicionar Experiencia
-                                </Button>
+                              <Divider />
+                              <Flex py={6} width='100%' justify={'space-between'}>
+                                <Flex>
+                                  <Button
+                                    onClick={() =>
+                                      educationDataAppend({
+                                        degree: '',
+                                        institution: '',
+                                        course: '',
+                                        state: '',
+                                        country: '',
+                                        initialDate: '',
+                                        endDate: '',
+                                        grantAndAwards: '',
+                                      })
+                                    }
+                                    size='sm'
+                                  >
+                                    Adicionar Experiencia
+                                  </Button>
+                                </Flex>
+                                <Flex>
+                                  <Button onClick={() => educationDataRemove(i)} mr={4} size='sm'>
+                                    Remover
+                                  </Button>
+                                </Flex>
                               </Flex>
-                              <Flex>
-                                <Button onClick={() => educationDataRemove(i)} mr={4} size='sm'>
-                                  Remover
-                                </Button>
-                              </Flex>
-                            </Flex>
-                          </Stack>
+                            </Stack>
+                          </>
                         </Box>
                       ))}
                     </>
@@ -776,11 +793,13 @@ export default function Login() {
                     {workDataFields.map((item, i) => (
                       <Box key={i}>
                         <Stack spacing={4} divider={<StackDivider />}>
-                          <Heading size={'md'}>{`Experiência ${i + 1} `}</Heading>
+                          <>
+                            {console.log(item)}
+                            <Heading size={'md'}>{`Experiência ${i + 1} `}</Heading>
+                          </>
                         </Stack>
                         <Stack spacing='4'>
                           <Select
-                            defaultValue={item?.country}
                             errors={errors.country && errors.country.message}
                             control={control}
                             options={countries}
@@ -789,7 +808,6 @@ export default function Login() {
                           />
 
                           <Select
-                            defaultValue={item?.state}
                             errors={errors.state && errors.state.message}
                             control={control}
                             options={states}
@@ -798,7 +816,6 @@ export default function Login() {
                           />
 
                           <Input
-                            defaultValue={item?.city}
                             name={`workData[${i}].city`}
                             control={control}
                             autoCapitalize='words'
@@ -806,7 +823,6 @@ export default function Login() {
                             label={'Cidade'}
                           />
                           <Input
-                            defaultValue={item?.initialOffice}
                             name={`workData[${i}].initialOffice`}
                             control={control}
                             autoCapitalize='words'
@@ -815,42 +831,37 @@ export default function Login() {
                           />
 
                           <Input
-                            defaultValue={item?.endOffice}
                             name={`workData[${i}].endOffice`}
                             control={control}
                             autoCapitalize='words'
-                            errors={errors.endOffice && errors.name.message}
+                            errors={errors.endOffice && errors.endOffice.message}
                             label={'Cargo Final'}
                           />
 
                           <Input
-                            defaultValue={item?.initialDate}
                             name={`workData[${i}].initialDate`}
                             control={control}
                             type='date'
-                            errors={errors.name && errors.name.message}
+                            errors={errors.initialDate && errors.initialDate.message}
                             label={'Início'}
                           />
 
                           <Input
-                            defaultValue={item?.endDate}
                             name={`workData[${i}].endDate`}
                             control={control}
                             type='date'
-                            errors={errors.name && errors.name.message}
+                            errors={errors.endDate && errors.endDate.message}
                             label={'Término'}
                           />
 
                           <Input
-                            defaultValue={item?.organization}
                             name={`workData[${i}].organization`}
                             control={control}
-                            errors={errors.name && errors.name.message}
+                            errors={errors.organization && errors.organization.message}
                             label={'Organização'}
                           />
 
                           <Input
-                            defaultValue={item?.industryType}
                             name={`workData[${i}].industryType`}
                             control={control}
                             errors={errors.industryType && errors.industryType.message}
@@ -858,7 +869,6 @@ export default function Login() {
                           />
 
                           <Input
-                            defaultValue={item?.activities}
                             name={`workData[${i}].activities`}
                             control={control}
                             errors={errors.activities && errors.activities.message}
@@ -866,8 +876,7 @@ export default function Login() {
                           />
 
                           <Select
-                            defaultValue={item?.grantAndAwards}
-                            errors={errors.state && errors.grantAndAwards.message}
+                            errors={errors.grantAndAwards && errors.grantAndAwards.message}
                             control={control}
                             options={[
                               {
@@ -884,8 +893,7 @@ export default function Login() {
                           />
 
                           <Select
-                            defaultValue={item?.coFounder}
-                            errors={errors.state && errors.coFounder.message}
+                            errors={errors.coFounder && errors.coFounder.message}
                             control={control}
                             options={xpOptions}
                             name={`workData[${i}].coFounder`}
@@ -893,8 +901,7 @@ export default function Login() {
                           />
 
                           <Select
-                            defaultValue={item?.managedByFamily}
-                            errors={errors.state && errors.managedByFamily.message}
+                            errors={errors.managedByFamily && errors.managedByFamily.message}
                             control={control}
                             options={xpOptions}
                             name={`workData[${i}].managedByFamily`}
@@ -957,34 +964,34 @@ export default function Login() {
                         </Button>
                       </Flex>
                     </Flex>
-                    {starFields.map((item, i) => (
+                    {starFields.map((item: any, i) => (
                       <Card key={i} variant='filled' py={5} mb={10}>
                         <CardHeader>
-                          <Heading size={'md'}>{`Experiência ${i + 1} `}</Heading>
+                          <>
+                            {console.log(item)}
+                            <Heading size={'md'}>{`Experiência ${i + 1} `}</Heading>
+                          </>
                         </CardHeader>
                         <CardBody>
                           <Input
                             textArea
-                            defaultValue={item?.situation}
                             name={`star[${i}].situation`}
                             control={control}
-                            errors={errors.name && errors.name.message}
+                            errors={errors.situation && errors.situation.message}
                             label={'Situação'}
                           />
                           <Input
                             textArea
-                            defaultValue={item?.task}
                             name={`star[${i}].task`}
                             control={control}
-                            errors={errors.name && errors.name.message}
+                            errors={errors.task && errors.task.message}
                             label={'Tarefa'}
                           />
                           <Input
                             textArea
-                            defaultValue={item?.result}
                             name={`star[${i}].result`}
                             control={control}
-                            errors={errors.name && errors.name.message}
+                            errors={errors.result && errors.result.message}
                             label={'Resultado'}
                           />
                         </CardBody>

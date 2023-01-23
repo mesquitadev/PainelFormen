@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Header } from '@/components';
+// import { Header } from '@/components';
 import { Box, Container } from '@chakra-ui/react';
 
 interface ILayout {
@@ -9,7 +9,7 @@ interface ILayout {
 function Layout({ children }: ILayout) {
   return (
     <Box>
-      <Header />
+      {/*<Header />*/}
       <Container
         h={'100%'}
         mx={'auto'}
