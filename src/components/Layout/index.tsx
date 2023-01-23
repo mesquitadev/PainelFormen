@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import { Header } from '@/components';
-import { Container, Flex, Portal, Spinner, Box } from '@chakra-ui/react';
-import { useLoading } from '@/hooks/useLoading';
+import { Box, Container } from '@chakra-ui/react';
 
 interface ILayout {
   children: ReactNode;

@@ -328,6 +328,13 @@
     "@chakra-ui/react-use-merge-refs" "2.0.4"
     "@chakra-ui/spinner" "2.0.10"
 
+"@chakra-ui/card@^2.1.6":
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/card/-/card-2.1.6.tgz#27176bdee363ecab7d563c4997c4b2fe9e835ecc"
+  integrity sha512-fFd/WAdRNVY/WOSQv4skpy0WeVhhI0f7dTY1Sm0jVl0KLmuP/GnpsWtKtqWjNcV00K963EXDyhlk6+9oxbP4gw==
+  dependencies:
+    "@chakra-ui/shared-utils" "2.0.5"
+
 "@chakra-ui/checkbox@2.2.1":
   version "2.2.1"
   resolved "https://registry.npmjs.org/@chakra-ui/checkbox/-/checkbox-2.2.1.tgz"
@@ -434,6 +441,17 @@
     "@chakra-ui/react-types" "2.0.3"
     "@chakra-ui/react-use-merge-refs" "2.0.4"
 
+"@chakra-ui/form-control@2.0.17":
+  version "2.0.17"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/form-control/-/form-control-2.0.17.tgz#2f710325e77ce35067337616d440f903b137bdd5"
+  integrity sha512-34ptCaJ2LNvQNOlB6MAKsmH1AkT1xo7E+3Vw10Urr81yTOjDTM/iU6vG3JKPfRDMyXeowPjXmutlnuk72SSjRg==
+  dependencies:
+    "@chakra-ui/icon" "3.0.16"
+    "@chakra-ui/react-context" "2.0.7"
+    "@chakra-ui/react-types" "2.0.7"
+    "@chakra-ui/react-use-merge-refs" "2.0.7"
+    "@chakra-ui/shared-utils" "2.0.5"
+
 "@chakra-ui/hooks@2.0.11":
   version "2.0.11"
   resolved "https://registry.npmjs.org/@chakra-ui/hooks/-/hooks-2.0.11.tgz"
@@ -450,6 +468,13 @@
   integrity sha512-RG4jf/XmBdaxOYI5J5QstEtTCPoVlmrQ/XiWhvN0LTgAnmZIqVwFl3Uw+satArdStHAs0GmJZg/E/soFTWuFmw==
   dependencies:
     "@chakra-ui/shared-utils" "2.0.2"
+
+"@chakra-ui/icon@3.0.16":
+  version "3.0.16"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/icon/-/icon-3.0.16.tgz#6413ec637c0c3acc204301485f05451b5bcd6ba4"
+  integrity sha512-RpA1X5Ptz8Mt39HSyEIW1wxAz2AXyf9H0JJ5HVx/dBdMZaGMDJ0HyyPBVci0m4RCoJuyG1HHG/DXJaVfUTVAeg==
+  dependencies:
+    "@chakra-ui/shared-utils" "2.0.5"
 
 "@chakra-ui/image@2.0.11":
   version "2.0.11"
@@ -644,6 +669,11 @@
   resolved "https://registry.npmjs.org/@chakra-ui/react-context/-/react-context-2.0.4.tgz"
   integrity sha512-eBITFkf7fLSiMZrSdhweK4fYr41WUNMEeIEOP2dCWolE7WgKxNYaYleC+iRGY0GeXkFM2KYywUtixjJe29NuVA==
 
+"@chakra-ui/react-context@2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/react-context/-/react-context-2.0.7.tgz#f79a2b072d04d4280ec8799dc03a8a1af521ca2e"
+  integrity sha512-i7EGmSU+h2GB30cwrKB4t1R5BMHyGoJM5L2Zz7b+ZUX4aAqyPcfe97wPiQB6Rgr1ImGXrUeov4CDVrRZ2FPgLQ==
+
 "@chakra-ui/react-env@2.0.10":
   version "2.0.10"
   resolved "https://registry.npmjs.org/@chakra-ui/react-env/-/react-env-2.0.10.tgz"
@@ -653,6 +683,11 @@
   version "2.0.3"
   resolved "https://registry.npmjs.org/@chakra-ui/react-types/-/react-types-2.0.3.tgz"
   integrity sha512-1mJYOQldFTALE0Wr3j6tk/MYvgQIp6CKkJulNzZrI8QN+ox/bJOh8OVP4vhwqvfigdLTui0g0k8M9h+j2ub/Mw==
+
+"@chakra-ui/react-types@2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/react-types/-/react-types-2.0.7.tgz#799c166a44882b23059c8f510eac9bd5d0869ac4"
+  integrity sha512-12zv2qIZ8EHwiytggtGvo4iLT0APris7T0qaAWqzpUGS0cdUtR8W+V1BJ5Ocq+7tA6dzQ/7+w5hmXih61TuhWQ==
 
 "@chakra-ui/react-use-animation-state@2.0.5":
   version "2.0.5"
@@ -720,6 +755,11 @@
   version "2.0.4"
   resolved "https://registry.npmjs.org/@chakra-ui/react-use-merge-refs/-/react-use-merge-refs-2.0.4.tgz"
   integrity sha512-aoWvtE5tDQNaLCiNUI6WV+MA2zVcCLR5mHSCISmowlTXyXOqOU5Fo9ZoUftzrmgCJpDu5x1jfUOivxuHUueb0g==
+
+"@chakra-ui/react-use-merge-refs@2.0.7":
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/react-use-merge-refs/-/react-use-merge-refs-2.0.7.tgz#1a1fe800fb5501ec3da4088fbac78c03bbad13a7"
+  integrity sha512-zds4Uhsc+AMzdH8JDDkLVet9baUBgtOjPbhC5r3A0ZXjZvGhCztFAVE3aExYiVoMPoHLKbLcqvCWE6ioFKz1lw==
 
 "@chakra-ui/react-use-outside-click@2.0.4":
   version "2.0.4"
@@ -839,6 +879,11 @@
   resolved "https://registry.npmjs.org/@chakra-ui/shared-utils/-/shared-utils-2.0.2.tgz"
   integrity sha512-wC58Fh6wCnFFQyiebVZ0NI7PFW9+Vch0QE6qN7iR+bLseOzQY9miYuzPJ1kMYiFd6QTOmPJkI39M3wHqrPYiOg==
 
+"@chakra-ui/shared-utils@2.0.5":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/shared-utils/-/shared-utils-2.0.5.tgz#cb2b49705e113853647f1822142619570feba081"
+  integrity sha512-4/Wur0FqDov7Y0nCXl7HbHzCg4aq86h+SXdoUeuCMD3dSj7dpsVnStLYhng1vxvlbUnLpdF4oz5Myt3i/a7N3Q==
+
 "@chakra-ui/skeleton@2.0.17":
   version "2.0.17"
   resolved "https://registry.npmjs.org/@chakra-ui/skeleton/-/skeleton-2.0.17.tgz"
@@ -937,6 +982,14 @@
   integrity sha512-msR9YMynRXwZIqR6DgjQ2MogA/cW1syBx/R0v3es+9Zx8zlbuKdoLhYqajHteCup8dUzTeIH2Vs2vAwgq4wu5A==
   dependencies:
     "@chakra-ui/form-control" "2.0.11"
+
+"@chakra-ui/textarea@^2.0.18":
+  version "2.0.18"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/textarea/-/textarea-2.0.18.tgz#da6d629b465f65bbc7b48039c2e48a4ae1d853b4"
+  integrity sha512-aGHHb29vVifO0OtcK/k8cMykzjOKo/coDTU0NJqz7OOLAWIMNV2eGenvmO1n9tTZbmbqHiX+Sa1nPRX+pd14lg==
+  dependencies:
+    "@chakra-ui/form-control" "2.0.17"
+    "@chakra-ui/shared-utils" "2.0.5"
 
 "@chakra-ui/theme-tools@2.0.12":
   version "2.0.12"
@@ -2556,6 +2609,18 @@ cell-orientation@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/cell-orientation/-/cell-orientation-1.0.1.tgz"
   integrity sha512-DtEsrgP+donmPxpEZm7hK8zCPYDXAQ977ecJiE7G0gbTfnS6TZVBlief3IdRP/TZS1PVnJRGJTDdjSdV8mRDug==
+
+chakra-react-select@^4.4.3:
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/chakra-react-select/-/chakra-react-select-4.4.3.tgz#678fcb25b90b9f977628694d1a9d49d072e01128"
+  integrity sha512-anDgJyYUpIapTmUbgXB+Iw5hJ90hOPvgoUPUaYdO5q9zY2VBFhQ1L0gBMqWAQxiKUmuHpwQypf8sPoVtd0b3KA==
+  dependencies:
+    react-select "5.7.0"
+
+chakra-ui-steps@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/chakra-ui-steps/-/chakra-ui-steps-3.0.1.tgz#6a4f4e1d1087ede12b93f8fbe109b412eeb5baf1"
+  integrity sha512-Rm1YfEZ+VvI1Vo09J7qOMaKbmWybv5ZKg1VyFBQ9KaPMObOxlahG9TaZjPiypPE2rRkxMO4WdvSZePkYMCxGww==
 
 chalk@^2.0.0:
   version "2.4.2"
@@ -5876,6 +5941,11 @@ memoize-one@^5.0.0:
   resolved "https://registry.npmjs.org/memoize-one/-/memoize-one-5.2.1.tgz"
   integrity sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q==
 
+memoize-one@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-6.0.0.tgz#b2591b871ed82948aee4727dc6abceeeac8c1045"
+  integrity sha512-rkpe71W0N0c0Xz6QD0eJETuWAJGnJ9afsl1srmwPrI+yBCkge5EycXXbYRyvL29zZVUWQCY7InPRCv3GDXuZNw==
+
 memory-fs@^0.4.1:
   version "0.4.1"
   resolved "https://registry.npmjs.org/memory-fs/-/memory-fs-0.4.1.tgz"
@@ -7070,6 +7140,14 @@ react-icons@^4.2.0:
   resolved "https://registry.npmjs.org/react-icons/-/react-icons-4.4.0.tgz"
   integrity sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg==
 
+react-input-mask@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/react-input-mask/-/react-input-mask-2.0.4.tgz#9ade5cf8196f4a856dbf010820fe75a795f3eb14"
+  integrity sha512-1hwzMr/aO9tXfiroiVCx5EtKohKwLk/NT8QlJXHQ4N+yJJFyUuMT+zfTpLBwX/lK3PkuMlievIffncpMZ3HGRQ==
+  dependencies:
+    invariant "^2.2.4"
+    warning "^4.0.2"
+
 react-is@^16.13.1, react-is@^16.3.2, react-is@^16.6.0, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
@@ -7163,6 +7241,21 @@ react-select@*, react-select@^5.5.2:
     "@floating-ui/dom" "^1.0.1"
     "@types/react-transition-group" "^4.4.0"
     memoize-one "^5.0.0"
+    prop-types "^15.6.0"
+    react-transition-group "^4.3.0"
+    use-isomorphic-layout-effect "^1.1.2"
+
+react-select@5.7.0:
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/react-select/-/react-select-5.7.0.tgz#82921b38f1fcf1471a0b62304da01f2896cd8ce6"
+  integrity sha512-lJGiMxCa3cqnUr2Jjtg9YHsaytiZqeNOKeibv6WF5zbK/fPegZ1hg3y/9P1RZVLhqBTs0PfqQLKuAACednYGhQ==
+  dependencies:
+    "@babel/runtime" "^7.12.0"
+    "@emotion/cache" "^11.4.0"
+    "@emotion/react" "^11.8.1"
+    "@floating-ui/dom" "^1.0.1"
+    "@types/react-transition-group" "^4.4.0"
+    memoize-one "^6.0.0"
     prop-types "^15.6.0"
     react-transition-group "^4.3.0"
     use-isomorphic-layout-effect "^1.1.2"

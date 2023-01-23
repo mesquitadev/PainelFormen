@@ -3,8 +3,8 @@ import { extendTheme } from '@chakra-ui/react';
 export const theme = extendTheme({
   colors: {
     primary: {
-      darkest: '#45E28A',
-      dark: '#066361',
+      darkest: '#130f3b',
+      dark: '#130f3bdd',
       pure: '#0A817F',
       light: '#13D1CE',
       '200': '#0A817F',
@@ -44,5 +44,10 @@ export const theme = extendTheme({
       light: '#FFD75F',
       background: '#FEEBC8',
     },
+  },
+  fontWeights: {
+    normal: 400,
+    medium: 500,
+    bold: 700,
   },
 });

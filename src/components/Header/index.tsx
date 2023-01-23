@@ -26,6 +26,8 @@ import {
   Text,
   useDisclosure,
   VStack,
+  Wrap,
+  WrapItem,
 } from '@chakra-ui/react';
 import React, { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
@@ -151,18 +153,24 @@ const Header: React.FC = () => {
                   <MenuList>
                     <VStack mb={5}>
                       <Avatar name={userdata?.name} />
-                      <Text>
-                        {userdata?.name} | {userdata?.profile?.title}
-                      </Text>
+                      <Wrap>
+                        <WrapItem>
+                          <Center w='180px' h='80px'>
+                            <Text>
+                              {userdata?.name} | {userdata?.profile?.title}
+                            </Text>
+                          </Center>
+                        </WrapItem>
+                      </Wrap>
                     </VStack>
                     <MenuItem>Link 1</MenuItem>
                     <MenuItem>Link 2</MenuItem>
                     <MenuDivider />
-                    <MenuItem>
+                    <Center>
                       <Button variant='outline' onClick={onClose}>
                         Sair do Portal
                       </Button>
-                    </MenuItem>
+                    </Center>
                   </MenuList>
                 </Menu>
               </Flex>
@@ -209,9 +217,11 @@ const Header: React.FC = () => {
               </DrawerBody>
               <Divider />
               <DrawerFooter>
-                <Button variant='outline' onClick={onClose}>
-                  Sair do Portal
-                </Button>
+                <Center>
+                  <Button variant='outline' onClick={onClose}>
+                    Sair do Portal
+                  </Button>
+                </Center>
               </DrawerFooter>
             </DrawerContent>
           </Drawer>
