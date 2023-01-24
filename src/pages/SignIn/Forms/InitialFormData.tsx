@@ -1,4 +1,14 @@
-import { Link, List, ListIcon, ListItem, Stack, Text } from '@chakra-ui/react';
+import {
+  Center,
+  Heading,
+  Link,
+  List,
+  ListIcon,
+  ListItem,
+  OrderedList,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 import { MdCheckCircle } from 'react-icons/all';
 import React from 'react';
 
@@ -78,3 +88,172 @@ export const InitialFormData = () => {
     </>
   );
 };
+
+export const TextAtencao = () => (
+  <Stack py={5}>
+    <Text>Atenção!</Text>
+    <OrderedList spacing={2} pl={5}>
+      <ListItem>
+        Caso você queira salvar as suas respostas e continuar depois, clique na opção salvar minhas
+        respostas e continuar mais tarde. É necessário fazer isso todas as vezes que você deixar
+        este formulário no meio! Não se esqueça.
+      </ListItem>
+      <ListItem>
+        Caso você queira salvar as suas respostas e continuar depois, clique na opção salvar minhas
+        respostas e continuar mais tarde. É necessário fazer isso todas as vezes que você deixar
+        este formulário no meio! Não se esqueça.
+      </ListItem>
+    </OrderedList>
+  </Stack>
+);
+
+export const TextCadastroInicial = () => (
+  <>
+    <Text fontSize='3xl' align='center'>
+      Cadastro Inicial
+    </Text>
+    <TextAtencao />
+    <Stack py={2}>
+      <Text>
+        Nesta etapa, te solicitaremos informações básicas de contato e de autoidentificação. Fique à
+        vontade para responder às perguntas, e se não se sentir confortável em responder a alguma
+        delas, pode preencher a opção não me sinto confortável.
+      </Text>
+    </Stack>
+    <Stack py={2}>
+      <Text>
+        Nós valorizamos muito as contribuições de pessoas de origens diversas, com pontos de vista
+        diferentes, que buscam encontrar as melhores soluções a partir da perspectiva do outro, que
+        são de diferentes religiões, países, regiões, orientações sexuais, gênero, raça/cor e
+        origens sociais. Encorajamos pessoas de todos os backgrounds para se inscreverem nessa
+        oportunidade.
+      </Text>
+    </Stack>
+    <Stack py={2}>
+      <Text>
+        Informações pessoais pertencentes à raça, etnia e / ou orientação sexual de um indivíduo são
+        consideradas categorias confidenciais de informações pessoais para o Instituto Four. Estes
+        dados serão utilizados apenas de forma agregada - isto é, para entender características
+        gerais da base de interessados em participar do ProLíder -, jamais de forma individual.
+      </Text>
+    </Stack>
+    <Stack py={2}>
+      <Text>
+        Quando você disponibiliza estes dados, você consente com a análise agregada das suas
+        informações para que o Instituto Four possa mapear tendências demográficas, psicográficas e
+        comportamentais da sua base de jovens.
+      </Text>
+    </Stack>
+  </>
+);
+export const TextPasso1 = () => (
+  <>
+    <Text fontSize='3xl' align='center'>
+      Histórico Acadêmico
+    </Text>
+    <TextAtencao />
+    <Stack py={2}>
+      <Text>
+        Nesta etapa, te solicitaremos informações sobre o seu histórico acadêmico. Você pode inserir
+        quantas experiências de ensino desejar.
+      </Text>
+    </Stack>
+    <Stack py={2}>
+      <Text>
+        Caso você nos sinalize que já frequentou alguma instituição de ensino superior, verá que uma
+        janela solicitando que você nos documente esta experiência vai aparecer. Se desejar
+        adicionar outra, pode clicar na opção adicionar outra resposta e incluir mais informações.
+        Você pode fazer isso quantas vezes quiser.
+      </Text>
+    </Stack>
+  </>
+);
+export const TextPasso3 = () => (
+  <>
+    <Stack py={6}>
+      <Center>
+        <Heading size={'md'}>FORMULÁRIO STAR (SITUAÇÃO - TAREFA - AÇÃO - RESULTADO)</Heading>
+      </Center>
+      <TextAtencao />
+      <Text>
+        Quais foram as situações, na sua vida, em que você acredita que conseguiu solucionar
+        problemas de uma maneira que te deu orgulho? Esta etapa serve para que você nos fale sobre
+        isso e nos ajude a entender como você enfrenta problemas no dia-a-dia.
+      </Text>
+    </Stack>
+    <Stack py={2}>
+      <Text>
+        A metodologia STAR é uma forma de contar uma história. Primeiramente, você deve descrever
+        uma Situação pela qual estava passando, onde tenha resolvido algum tipo de problema. Você
+        vai apresentar qual era a sua Tarefa, ou seja, qual era a sua função dentro daquela
+        situação. Na Ação, você deve descrever como você desempenhou seu papel. E por fim,
+        descreverá quais foram os Resultados alcançados.
+      </Text>
+    </Stack>
+  </>
+);
+export const TextPasso4 = () => (
+  <>
+    <Stack py={6}>
+      <Center>
+        <Heading size={'md'}>HISTÓRICO PROFISSIONAL</Heading>
+      </Center>
+      <TextAtencao />
+      <Text>
+        Da mesma forma como na etapa passada, te solicitamos informações sobre o seu histórico -
+        desta vez, o profissional. Você pode inserir quantas experiências de ensino desejar.
+      </Text>
+    </Stack>
+    <Stack py={2}>
+      <Text>
+        Caso você nos sinalize que já teve alguma experiência de trabalho, verá que uma janela
+        solicitando que você nos documente esta experiência vai aparecer. Se desejar adicionar
+        outra, pode clicar na opção adicionar outra resposta e incluir mais informações. Você pode
+        fazer isso quantas vezes quiser.
+      </Text>
+    </Stack>
+  </>
+);
+export const TextPasso6 = () => (
+  <>
+    <Center>
+      <Heading size={'md'}>VIDEO DE APRESENTAÇÃO</Heading>
+    </Center>
+    <TextAtencao />
+    <Stack py={2}>
+      <Text>
+        Qual é a sua história? Quais são as suas ambições para o futuro? Como você acredita que o
+        ProLíder se conecta com ele, isto é, como acredita que a sua participação no programa será
+        diferencial para que você chegue mais longe?
+      </Text>
+    </Stack>
+    <Stack py={2}>
+      <Text>
+        Neste vídeo, você terá a oportunidade de contar, para nós, a sua história e os seus sonhos
+        de maneira resumida. Queremos te conhecer e entender mais sobre a sua essência e quem é
+        você.
+      </Text>
+    </Stack>
+    <Stack py={2}>
+      <Text>
+        Sabemos que é um processo desafiador, mas, para nós, é de extrema importância. Não se
+        preocupe em fazer um vídeo editado ou com uma câmera de qualidade. Pode fazer com os
+        recursos que tiver à disposição!
+      </Text>
+    </Stack>
+    <Stack py={2}>
+      <Text>O ENVIO DO VÍDEO É OBRIGATÓRIO PARA O PROSSEGUIMENTO NO PROCESSO SELETIVO!</Text>
+    </Stack>
+
+    <Stack py={5}>
+      <Text>
+        Acompanhe nossas novidades pelo nosso Instagram! Abraços e boa sorte, Equipe ProLíder :)
+      </Text>
+    </Stack>
+    <Stack py={4}>
+      <Link target='_blank' href='https://www.instagram.com/prolideroficial/'>
+        Instagram
+      </Link>
+    </Stack>
+  </>
+);
