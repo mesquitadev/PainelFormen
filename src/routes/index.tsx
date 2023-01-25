@@ -1,5 +1,5 @@
 import { Switch } from 'react-router-dom';
-import { SignIn } from '@/pages';
+import { SignIn, Confirm } from '@/pages';
 import Route from './Route';
 
 function Routes() {
@@ -7,6 +7,7 @@ function Routes() {
     <Switch>
       {/*<Route exact path='/auth/register' component={SignUp} />*/}
       <Route exact path='/' component={SignIn} />
+      <Route exact path='/confirm' component={Confirm} />
       {/*<Route exact path='/home' isPrivate component={Home} />*/}
     </Switch>
   );

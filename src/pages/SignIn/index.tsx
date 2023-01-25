@@ -14,6 +14,7 @@ import {
   Text,
   useBreakpointValue,
   useColorModeValue,
+  useToast,
 } from '@chakra-ui/react';
 import { Card, CardBody, CardHeader } from '@chakra-ui/card';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -27,26 +28,25 @@ import {
   InitialFormData,
   TextCadastroInicial,
   TextPasso1,
-  TextPasso4,
   TextPasso3,
+  TextPasso4,
   TextPasso6,
 } from './Forms/InitialFormData';
 import Input from '@/components/Input';
 import api from '@/services';
 import Select from '@/components/Select';
 import { Select as CSelect } from 'chakra-react-select';
-import { useToast } from '@chakra-ui/react';
 import LoadingOverlay from 'react-loading-overlay';
 import {
-  xpOptions,
-  steps,
-  degreeOptions,
-  genderIdentityOptions,
   breedOptions,
-  genderOptions,
+  degreeOptions,
   didYouMeetProLider,
+  genderIdentityOptions,
+  genderOptions,
+  steps,
+  xpOptions,
 } from './options';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 interface SignInFormData {
   name: string;
@@ -78,7 +78,6 @@ export default function Login() {
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
   const [xpOpt, setXpOptions] = useState(false);
-  const [handleAddWork, setHandleAddWork] = useState(false);
   const signInFormSchema = yup.object().shape({
     name: yup.string().required('Este campo é obrigatório'),
     surname: yup.string().required('Este campo é obrigatório'),
@@ -161,10 +160,11 @@ export default function Login() {
 
   const { loading, setLoading } = useLoading();
   const toast = useToast();
+  const history = useHistory();
 
   const [validate, setValidate] = useState(true);
 
-  const { handleSubmit, formState, control, trigger, watch } = useForm({
+  const { handleSubmit, formState, control, trigger } = useForm({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     resolver: yupResolver(validate ? signInFormSchema : signInvalidateFormSchema),
@@ -239,12 +239,12 @@ export default function Login() {
           duration: 9000,
           isClosable: true,
         });
-        <Redirect to='/confirm' />;
+        history.push('/confirm');
         setLoading(false);
       })
       .finally(() => setLoading(false));
   };
-  const { nextStep, prevStep, reset, activeStep } = useSteps({
+  const { nextStep, prevStep, activeStep } = useSteps({
     initialStep: 0,
   });
 
@@ -281,6 +281,7 @@ export default function Login() {
   };
 
   return (
+    // @ts-ignore
     <LoadingOverlay active={loading} spinner text='Aguarde, estamos salvando seu formuário...'>
       <Container py={{ base: '12', md: '12' }} px={{ base: '0', sm: '8' }} centerContent>
         <Stack spacing='8'>
