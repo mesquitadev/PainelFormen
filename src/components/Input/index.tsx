@@ -56,18 +56,7 @@ function Input({ control, name, errors, label, textArea, mask, ...rest }: InputP
         <ChakraInput
           as={InputMask}
           mask={mask}
-          focusBorderColor={errors ? 'negative.pure' : 'primary.pure'}
-          placeholder=' '
-          autoComplete='off'
-          errorBorderColor='negative.pure'
-          fontSize={{ base: '14px', md: '16px' }}
-          bgColor='neutral.background'
-          borderColor='neutral.pure'
-          color='neutral.pure'
-          border='1px'
-          borderRadius='8px'
-          size='lg'
-          _hover={{ bg: 'primary' }}
+          focusBorderColor={errors ? 'negative.pure' : 'primary.dark'}
           onBlur={onBlur}
           onChange={onChange}
           value={value || ''}
@@ -79,18 +68,7 @@ function Input({ control, name, errors, label, textArea, mask, ...rest }: InputP
       return (
         // @ts-ignore
         <Textarea
-          focusBorderColor={errors ? 'negative.pure' : 'primary.pure'}
-          placeholder=' '
-          autoComplete='off'
-          errorBorderColor='negative.pure'
-          fontSize={{ base: '14px', md: '16px' }}
-          bgColor='neutral.background'
-          borderColor='neutral.pure'
-          color='neutral.pure'
-          border='1px'
-          borderRadius='8px'
-          size='lg'
-          _hover={{ bg: 'primary' }}
+          focusBorderColor={errors ? 'negative.pure' : 'primary.dark'}
           onBlur={onBlur}
           onChange={onChange}
           value={value || ''}
@@ -101,18 +79,7 @@ function Input({ control, name, errors, label, textArea, mask, ...rest }: InputP
     } else {
       return (
         <ChakraInput
-          focusBorderColor={errors ? 'negative.pure' : 'primary.pure'}
-          placeholder=' '
-          autoComplete='off'
-          errorBorderColor='negative.pure'
-          fontSize={{ base: '14px', md: '16px' }}
-          bgColor='neutral.background'
-          borderColor='neutral.pure'
-          color='neutral.pure'
-          border='1px'
-          borderRadius='8px'
-          size='lg'
-          _hover={{ bg: 'primary' }}
+          focusBorderColor={errors ? 'negative.pure' : 'primary.dark'}
           onBlur={onBlur}
           onChange={onChange}
           value={value || ''}
@@ -127,7 +94,7 @@ function Input({ control, name, errors, label, textArea, mask, ...rest }: InputP
     <Controller
       control={control}
       name={name}
-      render={({ field: { onChange, onBlur, value, name, ref }, fieldState: { error } }) => (
+      render={({ field: { onChange, onBlur, value, name, ref } }) => (
         <>
           <FormControl id={name} isInvalid={!!errors}>
             {label && (
@@ -136,7 +103,7 @@ function Input({ control, name, errors, label, textArea, mask, ...rest }: InputP
               </FormLabel>
             )}
             {getInputType(onChange, onBlur, value, ref)}
-            <FormErrorMessage>{getError(error)}</FormErrorMessage>
+            {getError(errors)}
           </FormControl>
         </>
       )}

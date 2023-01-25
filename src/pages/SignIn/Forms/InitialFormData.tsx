@@ -99,9 +99,8 @@ export const TextAtencao = () => (
         este formulário no meio! Não se esqueça.
       </ListItem>
       <ListItem>
-        Caso você queira salvar as suas respostas e continuar depois, clique na opção salvar minhas
-        respostas e continuar mais tarde. É necessário fazer isso todas as vezes que você deixar
-        este formulário no meio! Não se esqueça.
+        Caso queira continuar de onde parou, clique na opção retornar a um formulário previamente
+        salvo.
       </ListItem>
     </OrderedList>
   </Stack>
