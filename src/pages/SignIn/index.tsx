@@ -100,12 +100,13 @@ export default function Login() {
     didYouMeetProLider: yup.string().required('Este campo é obrigatório'),
     videoUrl: yup.string().required('Este campo é obrigatório'),
     occupation: yup.string().required('Este campo é obrigatório'),
+    xpOpt: yup.boolean().optional(),
     educationData: yup.array().of(
       yup.object().shape({
         name: yup.string().required('Value is mendatory'),
       }),
     ),
-    workData: yup.array().when('work_data', {
+    workData: yup.array().when('xpOpt', {
       is: true,
       then: yup.array().of(
         yup.object().shape({
@@ -130,6 +131,7 @@ export default function Login() {
   });
 
   const handleGetAllCountries = useCallback(async () => {
+    setLoading(true);
     await api
       .get('/countries')
       .then((response) =>
@@ -140,18 +142,45 @@ export default function Login() {
           })),
         ),
       )
-      .catch((error) => console.log(error));
+      .catch(() => {
+        toast({
+          title: 'Erro!',
+          description:
+            'Ops, houve um erro ao buscar os países, favor recarregar a página, se o erro persistir, entre em contato com o suporte',
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        });
+        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
     await api
       .get('/states')
-      .then((response) =>
+      .then((response) => {
+        setLoading(false);
         setStates(
           response.data.map((state: any) => ({
             value: state?.nome,
             label: state?.nome,
           })),
-        ),
-      )
-      .catch((error) => console.log(error));
+        );
+      })
+      .catch(() => {
+        toast({
+          title: 'Erro!',
+          description:
+            'Ops, houve um erro ao buscar os estados, favor recarregar a página, se o erro persistir, entre em contato com o suporte',
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        });
+        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   useEffect(() => {
@@ -164,7 +193,7 @@ export default function Login() {
 
   const [validate, setValidate] = useState(true);
 
-  const { handleSubmit, formState, control, trigger } = useForm({
+  const { handleSubmit, formState, control, trigger, watch } = useForm({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
     resolver: yupResolver(validate ? signInFormSchema : signInvalidateFormSchema),
@@ -224,32 +253,10 @@ export default function Login() {
     control,
   });
 
-  const { errors } = formState;
-  const handleSignIn: SubmitHandler<SignInFormData> = async (values) => {
-    console.log('val', values);
-    setLoading(true);
-    await api
-      .post('/subscriber', values)
-      .then(() => setLoading(true))
-      .catch(({ response }) => {
-        toast({
-          title: 'Erro ao tentar salvar o formuário.',
-          description: response.data.message,
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-        });
-        history.push('/confirm');
-        setLoading(false);
-      })
-      .finally(() => setLoading(false));
-  };
-  const { nextStep, prevStep, activeStep } = useSteps({
-    initialStep: 0,
-  });
+  const FavFood = watch('xpOpt');
+  const xpWork = watch('xpWork');
 
-  const handleSelectExp = (value: any) => {
-    setXpOptions(value.value);
+  const handleAddEducationDataFields = useCallback(() => {
     educationDataAppend({
       degree: '',
       institution: '',
@@ -258,11 +265,12 @@ export default function Login() {
       country: '',
       initialDate: '',
       endDate: '',
+      studyingHere: '',
       grantAndAwards: '',
     });
-  };
-  const handleSelectWorkExp = (value: any) => {
-    setXpOptions(value.value);
+  }, [educationDataAppend]);
+
+  const handleAddWorkDataFields = useCallback(() => {
     workDataAppend({
       state: '',
       country: '',
@@ -278,11 +286,59 @@ export default function Login() {
       endDate: '',
       grantAndAwards: '',
     });
+  }, []);
+
+  useEffect(() => {
+    if (FavFood) {
+      handleAddEducationDataFields();
+    } else {
+      educationDataRemove();
+    }
+
+    if (xpWork) {
+      handleAddWorkDataFields();
+    } else {
+      workDataRemove();
+    }
+  }, [
+    FavFood,
+    educationDataAppend,
+    educationDataRemove,
+    handleAddEducationDataFields,
+    handleAddWorkDataFields,
+    workDataRemove,
+    xpWork,
+  ]);
+
+  const { errors } = formState;
+  const handleSignIn: SubmitHandler<SignInFormData> = async (values) => {
+    console.log('val', values);
+    setLoading(true);
+    await api
+      .post('/subscriber', values)
+      .then(() => setLoading(true))
+      .catch(({ response }) => {
+        toast({
+          title: 'Erro ao tentar salvar o formuário.',
+          description: response.data.message,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        });
+        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false);
+        history.push('/confirm');
+      });
   };
+  const { nextStep, prevStep, activeStep } = useSteps({
+    initialStep: 0,
+  });
 
   return (
     // @ts-ignore
-    <LoadingOverlay active={loading} spinner text='Aguarde, estamos salvando seu formuário...'>
+    <LoadingOverlay active={loading} spinner text='Aguarde...'>
       <Container py={{ base: '12', md: '12' }} px={{ base: '0', sm: '8' }} centerContent>
         <Stack spacing='8'>
           <Stack spacing='6' justify='center' align='center'>
@@ -458,144 +514,119 @@ export default function Login() {
                   </Step>
                   <Step key={2} index={2}>
                     <TextPasso1 />
-                    <FormControl py={6}>
-                      <FormLabel _invalid={{ color: 'negative.pure !important' }}>
-                        Você já frequentou alguma instituição de ensino superior?
-                      </FormLabel>
-                      <CSelect
-                        placeholder='Você já frequentou alguma instituição de ensino superior?'
-                        onChange={(e) => handleSelectExp(e)}
-                        options={xpOptions}
-                      />
-                    </FormControl>
-                    {xpOpt && (
-                      <>
-                        {educationDataFields.map((_item: any, i) => (
-                          <Box key={i}>
-                            <>
-                              <Stack spacing={4} divider={<StackDivider />}>
-                                <Heading size={'md'}>{`Experiência ${i + 1} `}</Heading>
-                              </Stack>
-                              <Stack spacing='4'>
-                                <Select
-                                  errors={errors.countryOfBirth && errors.countryOfBirth.message}
-                                  control={control}
-                                  options={countries}
-                                  name={`educationData[${i}].country`}
-                                  label={'País'}
-                                />
+                    <Select
+                      control={control}
+                      options={xpOptions}
+                      name={`xpOpt`}
+                      label={'Você já frequentou alguma instituição de ensino superior?'}
+                    />
 
-                                <Select
-                                  errors={errors.stateOfBirth && errors.stateOfBirth.message}
-                                  control={control}
-                                  options={states}
-                                  name={`educationData[${i}].state`}
-                                  label={'Estado'}
-                                />
+                    {educationDataFields.map((_item: any, i) => (
+                      <Box key={i}>
+                        <>
+                          <Stack spacing={4} divider={<StackDivider />}>
+                            <Heading size={'md'}>{`Experiência ${i + 1} `}</Heading>
+                          </Stack>
+                          <Stack spacing='4'>
+                            <Select
+                              errors={errors.countryOfBirth && errors.countryOfBirth.message}
+                              control={control}
+                              options={countries}
+                              loading={loading}
+                              name={`educationData[${i}].country`}
+                              label={'País'}
+                            />
 
-                                <Select
-                                  errors={errors.stateOfBirth && errors.stateOfBirth.message}
-                                  control={control}
-                                  options={degreeOptions}
-                                  name={`educationData[${i}].degree`}
-                                  label={
-                                    'Nível do curso (Técnico, Médio, Superior, Tecnólogo, etc.'
-                                  }
-                                />
+                            <Select
+                              errors={errors.stateOfBirth && errors.stateOfBirth.message}
+                              control={control}
+                              options={states}
+                              loading={loading}
+                              name={`educationData[${i}].state`}
+                              label={'Estado'}
+                            />
 
-                                <Input
-                                  name={`educationData[${i}].course`}
-                                  control={control}
-                                  autoCapitalize='words'
-                                  errors={errors.name && errors.name.message}
-                                  label={'Curso'}
-                                />
-                                <Input
-                                  name={`educationData[${i}].institution`}
-                                  control={control}
-                                  autoCapitalize='words'
-                                  errors={errors.name && errors.name.message}
-                                  label={'Instituição'}
-                                />
-                                <Input
-                                  name={`educationData[${i}].grantAndAwards`}
-                                  control={control}
-                                  errors={errors.name && errors.name.message}
-                                  label={'Premiações'}
-                                />
+                            <Select
+                              errors={errors.stateOfBirth && errors.stateOfBirth.message}
+                              control={control}
+                              options={degreeOptions}
+                              name={`educationData[${i}].degree`}
+                              label={'Nível do curso (Técnico, Médio, Superior, Tecnólogo, etc.'}
+                            />
 
-                                <Input
-                                  name={`educationData[${i}].initialDate`}
-                                  control={control}
-                                  type='date'
-                                  errors={errors.name && errors.name.message}
-                                  label={'Início'}
-                                />
+                            <Input
+                              name={`educationData[${i}].course`}
+                              control={control}
+                              autoCapitalize='words'
+                              errors={errors.name && errors.name.message}
+                              label={'Curso'}
+                            />
+                            <Input
+                              name={`educationData[${i}].institution`}
+                              control={control}
+                              autoCapitalize='words'
+                              errors={errors.name && errors.name.message}
+                              label={'Instituição'}
+                            />
+                            <Input
+                              name={`educationData[${i}].grantAndAwards`}
+                              control={control}
+                              errors={errors.name && errors.name.message}
+                              label={'Premiações'}
+                            />
 
-                                <Input
-                                  name={`educationData[${i}].endDate`}
-                                  control={control}
-                                  type='date'
-                                  errors={errors.name && errors.name.message}
-                                  label={'Término'}
-                                />
+                            <Input
+                              name={`educationData[${i}].initialDate`}
+                              control={control}
+                              type='date'
+                              errors={errors.name && errors.name.message}
+                              label={'Início'}
+                            />
 
-                                <Select
-                                  errors={errors.studyingHere && errors.studyingHere.message}
-                                  control={control}
-                                  options={xpOptions}
-                                  name={`educationData[${i}].studyingHere`}
-                                  label={'Ainda estuda aqui?'}
-                                />
+                            <Input
+                              name={`educationData[${i}].endDate`}
+                              control={control}
+                              type='date'
+                              errors={errors.name && errors.name.message}
+                              label={'Término'}
+                            />
 
-                                <Divider />
-                                <Flex py={6} width='100%' justify={'space-between'}>
-                                  <Flex>
-                                    <Button
-                                      onClick={() =>
-                                        educationDataAppend({
-                                          degree: '',
-                                          institution: '',
-                                          course: '',
-                                          state: '',
-                                          country: '',
-                                          initialDate: '',
-                                          endDate: '',
-                                          studyingHere: '',
-                                          grantAndAwards: '',
-                                        })
-                                      }
-                                      size='sm'
-                                    >
-                                      Adicionar Experiencia
-                                    </Button>
-                                  </Flex>
-                                  <Flex>
-                                    <Button onClick={() => educationDataRemove(i)} mr={4} size='sm'>
-                                      Remover
-                                    </Button>
-                                  </Flex>
-                                </Flex>
-                              </Stack>
-                            </>
-                          </Box>
-                        ))}
-                      </>
-                    )}
+                            <Select
+                              errors={errors.studyingHere && errors.studyingHere.message}
+                              control={control}
+                              options={xpOptions}
+                              name={`educationData[${i}].studyingHere`}
+                              label={'Ainda estuda aqui?'}
+                            />
+
+                            <Divider />
+                            <Flex py={6} width='100%' justify={'space-between'}>
+                              <Flex>
+                                <Button onClick={() => handleAddEducationDataFields()} size='sm'>
+                                  Adicionar Experiencia
+                                </Button>
+                              </Flex>
+                              <Flex>
+                                <Button onClick={() => educationDataRemove(i)} mr={4} size='sm'>
+                                  Remover
+                                </Button>
+                              </Flex>
+                            </Flex>
+                          </Stack>
+                        </>
+                      </Box>
+                    ))}
                   </Step>
                   <Step key={3} index={3}>
                     <TextPasso4 />
                     <>
-                      <FormControl py={6}>
-                        <FormLabel _invalid={{ color: 'negative.pure !important' }}>
-                          Você já teve alguma experiência profissional?
-                        </FormLabel>
-                        <CSelect
-                          placeholder='Você já frequentou alguma instituição de ensino superior?'
-                          onChange={(e) => handleSelectWorkExp(e)}
-                          options={xpOptions}
-                        />
-                      </FormControl>
+                      <Select
+                        errors={errors.country && errors.country.message}
+                        control={control}
+                        options={countries}
+                        name={'xpWork'}
+                        label={'Você já teve alguma experiência profissional?'}
+                      />
                       {workDataFields.map((_item, i) => (
                         <Box key={i}>
                           <Stack spacing={4} divider={<StackDivider />}>

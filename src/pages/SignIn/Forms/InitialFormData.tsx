@@ -56,7 +56,7 @@ export const InitialFormData = () => {
         <List spacing={2}>
           <ListItem>
             <ListIcon as={MdCheckCircle} color='green.500' />
-            Telefone: (33) 98854 - 6292
+            Telefone: (11) 93945-7983
           </ListItem>
           <ListItem>
             <ListIcon as={MdCheckCircle} color='green.500' />
