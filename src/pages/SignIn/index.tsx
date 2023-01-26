@@ -5,8 +5,6 @@ import {
   Container,
   Divider,
   Flex,
-  FormControl,
-  FormLabel,
   Heading,
   Image,
   Stack,
@@ -35,7 +33,6 @@ import {
 import Input from '@/components/Input';
 import api from '@/services';
 import Select from '@/components/Select';
-import { Select as CSelect } from 'chakra-react-select';
 import LoadingOverlay from 'react-loading-overlay';
 import {
   breedOptions,
@@ -77,7 +74,6 @@ interface SignInFormData {
 export default function Login() {
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
-  const [xpOpt, setXpOptions] = useState(false);
   const signInFormSchema = yup.object().shape({
     name: yup.string().required('Este campo é obrigatório'),
     surname: yup.string().required('Este campo é obrigatório'),
