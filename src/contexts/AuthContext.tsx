@@ -2,7 +2,7 @@ import { createContext, ReactNode, useCallback, useState } from 'react';
 import Cookies from 'js-cookie';
 import api from '@/services';
 import { useLoading } from '@/hooks/useLoading';
-import { useToast } from '@chakra-ui/react';
+import { useSnackBar } from '@/hooks/useSnackBar';
 
 interface User {
   email?: string;
@@ -34,11 +34,10 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const { setLoading } = useLoading();
-  const toast = useToast();
+  const { setError, setMessage, setType } = useSnackBar();
 
   const [data, setData] = useState<AuthState>(() => {
-    const token = Cookies.get('positivo.token');
-
+    const token = Cookies.get('formen.token');
     if (token) {
       return { token };
     }
@@ -50,32 +49,28 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     async ({ email, password }: User) => {
       setLoading(true);
       try {
-        const response = await api.post('auth/login', {
+        const response = await api.post('admin/login', {
           email,
           password,
         });
 
-        const { token } = response.data;
-        Cookies.set('positivo.token', response.data.token, { expires: 7 });
-        setData({ token });
-      } catch (err) {
-        toast({
-          title: 'Erro na Autenticação.',
-          description: 'Ocorreu um erro ao fazer login, verifique as credenciais inseridas,',
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-        });
+        Cookies.set('formen.token', response.data.data.token, { expires: 7 });
+        setData({ token: response.data.data.token });
+      } catch (e) {
+        console.log(e);
+        setError(true);
+        setType('error');
+        setMessage('Email ou senha incorretos');
         setLoading(false);
       } finally {
         setLoading(false);
       }
     },
-    [setLoading, toast],
+    [setLoading],
   );
 
   const signOut = useCallback(() => {
-    Cookies.remove('positivo.token');
+    Cookies.remove('formen.token');
     setData({} as AuthState);
   }, []);
 

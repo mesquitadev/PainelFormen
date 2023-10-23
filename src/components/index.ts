@@ -1,1 +1,2 @@
-export { default as Breadcumb } from './Breadcumb';
+export { default as NotFound } from './NotFound';
+export { default as PageHeading } from './PageHeading';

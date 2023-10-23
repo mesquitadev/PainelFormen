@@ -1,25 +1,20 @@
-import { BrowserRouter as Router } from 'react-router-dom';
-import { AuthProvider } from '@/contexts/AuthContext';
-import ErrorBoundary from '@/handlers/ErrorBoundary';
+import { BrowserRouter } from 'react-router-dom';
 import Routes from './routes';
-import { LoadingProvider } from '@/contexts/LoadingContext';
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
-import { theme as defaultTheme } from '@/styles/theme';
+import '@/styles/globals.css';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import theme from '@/styles/theme';
+import AppProvider from '@/contexts/AppProvider';
 
-const theme = extendTheme(defaultTheme);
 function App() {
   return (
-    <ChakraProvider theme={theme}>
-      <Router>
-        <ErrorBoundary>
-          <LoadingProvider>
-            <AuthProvider>
-              <Routes />
-            </AuthProvider>
-          </LoadingProvider>
-        </ErrorBoundary>
-      </Router>
-    </ChakraProvider>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <AppProvider>
+          <Routes />
+        </AppProvider>
+        <CssBaseline />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
