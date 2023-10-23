@@ -62,7 +62,7 @@ export default function Login() {
         <LockOutlinedIcon />
       </Avatar>
       <Typography component='h1' variant='h5'>
-        Sign in
+        Entrar no Sistema
       </Typography>
       <Box component='form' onSubmit={handleSubmit(handleSignIn)} noValidate sx={{ mt: 1 }}>
         <Input
